@@ -2,10 +2,16 @@ import React from 'react';
 
 class Button extends React.Component {
     render() {
+
+        const mod = this.props.textContent.toLowerCase();
+
         return <button
+            className={`btn btn--${mod}`}
             onClick={this.props.clickHandle}
             disabled={this.props.disableButton}>
+
                 {this.props.textContent}
+
             </button>
     }
 }
@@ -41,27 +47,24 @@ class App extends React.Component {
 
         const todoList = [];
         for (let i = 0; i < this.state.taskNumber; i++) {
-            const task = `Task number ${i+1}`;
+            const task = <li key={i} className={'list__task'}>Task number {i+1}</li>;
             todoList.push(task)
         }
 
         const disableButton = this.state.taskNumber <= 0;
 
-        return <div>
+        return <div className={'container'}>
             <div className={'btns'}>
                 <Button
-                    className={'btn btn--add'}
                     textContent={'Add'}
                     clickHandle={this.addTask}
                 />
                 <Button
-                    className={'btn btn--rm'}
                     textContent={'Remove'}
                     clickHandle={this.removeTask}
                     disableButton={disableButton}
                 />
                 <Button
-                    className={'btn btn--clr'}
                     textContent={'Clear'}
                     clickHandle={this.clearTasks}
                     disableButton={disableButton}
